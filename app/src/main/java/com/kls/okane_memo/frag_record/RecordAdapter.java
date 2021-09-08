@@ -1,4 +1,4 @@
-package com.kls.okane_memo.adapter;
+package com.kls.okane_memo.frag_record;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

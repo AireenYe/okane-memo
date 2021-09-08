@@ -11,7 +11,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.kls.okane_memo.adapter.RecordAdapter;
+import com.kls.okane_memo.frag_record.RecordAdapter;
 import com.kls.okane_memo.frag_record.RecordFragment;
 
 import java.util.ArrayList;
