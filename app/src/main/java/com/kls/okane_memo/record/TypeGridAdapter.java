@@ -1,4 +1,4 @@
-package com.kls.okane_memo.frag_record;
+package com.kls.okane_memo.record;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kls.okane_memo.R;

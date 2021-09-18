@@ -25,8 +25,8 @@
             android:layout_marginStart="20dp"
             android:layout_centerVertical="true"
             />
-
         <TextView
+            android:id="@+id/record_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -34,8 +34,57 @@
             android:text="选择类型"
             android:textColor="@color/white"
             android:textSize="25sp"
-            android:textStyle="bold"
             android:typeface="sans" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="24dp"
+        android:paddingStart="48dp"
+        android:paddingEnd="48dp">
+        <TextView
+            android:id="@+id/income_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/income"
+            android:textSize="12sp"
+            android:textColor="@color/grey"/>
+        <View
+            android:id="@+id/income_line"
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/income_tv"
+            android:background="@color/grey_deep"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/record_in_gv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/income_line"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/outcome_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/outcome"
+            android:textSize="12sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/record_in_gv"
+            android:layout_marginTop="16dp"/>
+        <View
+            android:id="@+id/outcome_line"
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/outcome_tv"
+            android:background="@color/grey_deep"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/record_out_gv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/outcome_line"
+            android:layout_marginTop="16dp"
+            />
+    </RelativeLayout>
 </LinearLayout>

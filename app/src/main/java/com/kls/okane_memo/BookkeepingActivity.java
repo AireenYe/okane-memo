@@ -4,18 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
-import com.kls.okane_memo.frag_record.RecordAdapter;
-import com.kls.okane_memo.frag_record.RecordFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookkeepingActivity extends AppCompatActivity {
 

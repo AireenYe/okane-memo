@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">okane-memo</string>
+    <string name="income">收入</string>
+    <string name="outcome">支出</string>
 </resources>
