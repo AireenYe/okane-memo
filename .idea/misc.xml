@@ -9,10 +9,13 @@
         <entry key="..\:/D/code/okane/okane-memo/app/src/main/res/layout/grid_item_type.xml" value="0.1" />
         <entry key="..\:/Users/Leo/AndroidStudioProjects/okanememo/app/src/main/res/layout/activity_bookkeeping.xml" value="0.10144927536231885" />
         <entry key="..\:/Users/Leo/AndroidStudioProjects/okanememo/app/src/main/res/layout/activity_main.xml" value="0.10144927536231885" />
+        <entry key="..\:/mine/okane-memo/app/src/main/res/drawable/bg_date_picker.xml" value="0.26979166666666665" />
+        <entry key="..\:/mine/okane-memo/app/src/main/res/layout/activity_bookkeeping.xml" value="0.264" />
+        <entry key="..\:/mine/okane-memo/app/src/main/res/layout/activity_main.xml" value="0.264" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
