@@ -26,8 +26,8 @@ public class TypeGridAdapter extends RecyclerView.Adapter<TypeGridAdapter.GridVi
 
     @Override
     public void onBindViewHolder(TypeGridAdapter.GridViewHolder holder, final int position) {
-        holder.textView.setText("餐饮");
-        holder.imageView.setImageResource(R.mipmap.ic_eat);
+        holder.textView.setText("测试");
+        holder.imageView.setImageResource(R.drawable.test);
     }
 
     @Override

@@ -5,20 +5,26 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.kls.okane_memo.record.TypeGridAdapter;
 
 public class BookkeepingActivity extends AppCompatActivity {
 
-    public ImageView backIv;
-    public TabLayout tabLayout;
-    public ViewPager2 viewPager;
+    private ImageView backIv;
+    private RecyclerView inRvGrid, outRvGrid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookkeeping);
+
+        inRvGrid = findViewById(R.id.record_in_gv);
+        inRvGrid.setLayoutManager(new GridLayoutManager(this, 3));
+        inRvGrid.setAdapter(new TypeGridAdapter(this));
 
         backIv = findViewById(R.id.record_iv_back);
         backIv.setOnClickListener(new OnClick());
