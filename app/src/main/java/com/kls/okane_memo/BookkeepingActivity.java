@@ -24,7 +24,11 @@ public class BookkeepingActivity extends AppCompatActivity {
 
         inRvGrid = findViewById(R.id.record_in_gv);
         inRvGrid.setLayoutManager(new GridLayoutManager(this, 3));
-        inRvGrid.setAdapter(new TypeGridAdapter(this));
+        inRvGrid.setAdapter(new TypeGridAdapter(this, 1));
+
+        outRvGrid = findViewById(R.id.record_out_gv);
+        outRvGrid.setLayoutManager(new GridLayoutManager(this, 3));
+        outRvGrid.setAdapter(new TypeGridAdapter(this, -1));
 
         backIv = findViewById(R.id.record_iv_back);
         backIv.setOnClickListener(new OnClick());
