@@ -2,15 +2,18 @@ package com.kls.okane_memo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SingleRecordActivity extends AppCompatActivity {
 
+    EditText et;
     ImageView backIv, typeIv;
-    TextView typeTv;
+    TextView kindTv, typeTv;
     Bundle typeBundle;
 
     @Override
@@ -18,10 +21,29 @@ public class SingleRecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_record);
         typeBundle = getIntent().getExtras();
+
+        setKindString();
+        setInput();
         setTypeRow();
+
 
         backIv = findViewById(R.id.single_record_iv_back);
         backIv.setOnClickListener(new OnClick());
+    }
+    private void setKindString(){
+        kindTv = findViewById(R.id.kind_tv);
+        int kind = typeBundle.getInt("kind");
+        if(kind == 1){
+            kindTv.setText(R.string.income);
+        }else{
+            kindTv.setText(R.string.outcome);
+        }
+    }
+
+    private void setInput(){
+        et = findViewById(R.id.input_money);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/bahnschrift.ttf");
+        et.setTypeface(tf);
     }
 
     private void setTypeRow(){
