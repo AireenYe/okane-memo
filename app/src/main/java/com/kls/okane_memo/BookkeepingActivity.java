@@ -1,5 +1,6 @@
 package com.kls.okane_memo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,13 +26,27 @@ public class BookkeepingActivity extends AppCompatActivity {
         inRvGrid = findViewById(R.id.record_in_gv);
         inRvGrid.setLayoutManager(new GridLayoutManager(this, 3));
         inRvGrid.setAdapter(new TypeGridAdapter(this, 1));
+//        setRvGridOnClick(inRvGrid);
 
         outRvGrid = findViewById(R.id.record_out_gv);
         outRvGrid.setLayoutManager(new GridLayoutManager(this, 3));
         outRvGrid.setAdapter(new TypeGridAdapter(this, -1));
+//        setRvGridOnClick(outRvGrid);
+
 
         backIv = findViewById(R.id.record_iv_back);
         backIv.setOnClickListener(new OnClick());
+    }
+
+    private void setRvGridOnClick(RecyclerView rvGrid){
+        rvGrid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BookkeepingActivity.this, SingleRecordActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+            }
+        });
     }
 
     private class OnClick implements View.OnClickListener{
