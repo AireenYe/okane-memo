@@ -13,9 +13,13 @@ import com.kls.okane_memo.R;
 
 public class TypeGridAdapter extends RecyclerView.Adapter<TypeGridAdapter.GridViewHolder> {
     private Context mContext;
+    private TypeList typeList;
+    private int kind;
 
-    public TypeGridAdapter(Context context){
+    public TypeGridAdapter(Context context, int kind){
         this.mContext = context;
+        this.kind = kind;
+        typeList = TypeList.getInstance();
     }
 
     @Override
@@ -26,13 +30,23 @@ public class TypeGridAdapter extends RecyclerView.Adapter<TypeGridAdapter.GridVi
 
     @Override
     public void onBindViewHolder(TypeGridAdapter.GridViewHolder holder, final int position) {
-        holder.textView.setText("测试");
-        holder.imageView.setImageResource(R.drawable.test);
+        TypeBean type;
+        if(kind == 1){
+            type = typeList.getInTypeBean(position);
+        }else{
+            type = typeList.getOutTypeBean(position);
+        }
+        holder.textView.setText(type.getTypename());
+        holder.imageView.setImageResource(type.getImageId());
     }
 
     @Override
     public int getItemCount() {
-        return 7;
+        if(kind == 1){
+            return typeList.getSizeOfInTypes();
+        }else{
+            return typeList.getSizeOfOutTypes();
+        }
     }
 
     class GridViewHolder extends RecyclerView.ViewHolder {
