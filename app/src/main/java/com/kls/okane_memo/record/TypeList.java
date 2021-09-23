@@ -40,7 +40,9 @@ public class TypeList {
         outTypeList.add(new TypeBean(1, R.drawable.ic_food1, -1,"食物"));
         outTypeList.add(new TypeBean(2, R.drawable.ic_clothes1, -1, "衣服"));
         outTypeList.add(new TypeBean(2, R.drawable.ic_medication1, -1, "药品"));
-        outTypeList.add(new TypeBean(2, R.drawable.ic_clothes1, -1, "衣服"));
+        outTypeList.add(new TypeBean(2, R.drawable.ic_shopping1, -1, "购物"));
+        outTypeList.add(new TypeBean(1, R.drawable.ic_study1, -1,"学习"));
+        outTypeList.add(new TypeBean(1, R.drawable.ic_travel1, -1,"旅游"));
     }
 
 }
