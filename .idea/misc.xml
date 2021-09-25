@@ -11,8 +11,11 @@
         <entry key="..\:/Users/Leo/AndroidStudioProjects/okanememo/app/src/main/res/layout/activity_bookkeeping.xml" value="0.10144927536231885" />
         <entry key="..\:/Users/Leo/AndroidStudioProjects/okanememo/app/src/main/res/layout/activity_main.xml" value="0.10144927536231885" />
         <entry key="..\:/mine/okane-memo/app/src/main/res/drawable/bg_date_picker.xml" value="0.26979166666666665" />
+        <entry key="..\:/mine/okane-memo/app/src/main/res/drawable/ic_icon_correct.xml" value="0.11927083333333334" />
         <entry key="..\:/mine/okane-memo/app/src/main/res/layout/activity_bookkeeping.xml" value="0.264" />
         <entry key="..\:/mine/okane-memo/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/mine/okane-memo/app/src/main/res/layout/activity_single_record.xml" value="0.2" />
+        <entry key="..\:/mine/okane-memo/app/src/main/res/layout/fragment_record_type.xml" value="0.103125" />
       </map>
     </option>
   </component>
