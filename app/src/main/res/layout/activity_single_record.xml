@@ -178,6 +178,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="36dp"
         android:backgroundTint="@color/black"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/ic_correct" />
 
 </RelativeLayout>
