@@ -48,6 +48,10 @@ public class TypeList {
         outTypeList.add(new TypeBean(9, R.drawable.ic_communication1, -1,"通讯"));
         outTypeList.add(new TypeBean(10, R.drawable.ic_gift1, -1,"礼物"));
         outTypeList.add(new TypeBean(11, R.drawable.ic_leisure1, -1,"休闲娱乐"));
+
+        inTypeList.add(new TypeBean(0, R.drawable.ic_redpacket, -1,"红包"));
+        inTypeList.add(new TypeBean(1, R.drawable.ic_salary, -1,"工资"));
+        inTypeList.add(new TypeBean(2, R.drawable.ic_invest_income, -1,"投资回报"));
     }
 
 }
