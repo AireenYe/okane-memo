@@ -12,8 +12,8 @@ import java.util.List;
 
 @Dao
 public interface RecordDao {
-    @Query("select * from records where date = :date")
-    List<Record> getRecordByDate(String date);
+    @Query("select * from records where year = :year and month = :month and dayOfMonth = :dayOfMonth")
+    List<Record> getRecordByDate(int year, int month, int dayOfMonth);
 
     @Insert
     void insertRecord(Record record);

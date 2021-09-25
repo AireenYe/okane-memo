@@ -97,8 +97,9 @@
                 android:layout_toRightOf="@id/remark_iv"
                 android:gravity="center_vertical"
                 android:hint="@string/remark"
-                android:textColorHint="@color/grey"
                 android:textColor="@color/black_light"
+                android:textColorHint="@color/grey"
+                android:background="@null"
                 android:textSize="16sp"
                 android:typeface="sans" />
         </RelativeLayout>
@@ -172,10 +173,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="36dp"
         android:backgroundTint="@color/black"
         app:srcCompat="@android:drawable/ic_input_add" />
 

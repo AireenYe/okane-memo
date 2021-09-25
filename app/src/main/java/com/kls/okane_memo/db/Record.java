@@ -13,13 +13,47 @@ public class Record {
 
     String typename;    // 类型名称
     int kind;   // 类型，1为收入，-1为支出
-    String date;     // 该记录的时间
+    int year;   // 年份
+    int month;  // 月份
+    int dayOfMonth;     // 日期
     String remark;      // 备注
+
+    public Record(String typename, int kind, int year, int month, int dayOfMonth, String remark) {
+        this.typename = typename;
+        this.kind = kind;
+        this.year = year;
+        this.month = month;
+        this.dayOfMonth = dayOfMonth;
+        this.remark = remark;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDayOfMonth() {
+        return dayOfMonth;
+    }
+
+    public void setDayOfMonth(int dayOfMonth) {
+        this.dayOfMonth = dayOfMonth;
+    }
 
     public int getId() {
         return id;
     }
-
 
     public String getTypename() {
         return typename;
@@ -37,14 +71,6 @@ public class Record {
         this.kind = kind;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public String getRemark() {
         return remark;
     }
@@ -53,10 +79,5 @@ public class Record {
         this.remark = remark;
     }
 
-    public Record(String typename, int kind, String date, String remark) {
-        this.typename = typename;
-        this.kind = kind;
-        this.date = date;
-        this.remark = remark;
-    }
+
 }

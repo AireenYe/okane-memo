@@ -1,9 +1,11 @@
 package com.kls.okane_memo;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,15 +16,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class SingleRecordActivity extends AppCompatActivity {
 
-    EditText et;
+    EditText moneyEt, remarkEt;
     ImageView backIv, typeIv;
     TextView kindTv, typeTv, dateTv;
     Bundle typeBundle;
-    String date, remarkInfo;
+    String remarkInfo;
+    int recordYear, recordMonth, recordDayOfMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +35,11 @@ public class SingleRecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_record);
         typeBundle = getIntent().getExtras();
 
-
         setKindString();
-        setInput();
+        setMoneyInput();
         setTypeRow();
-
-        dateTv = findViewById(R.id.date_tv);
-        dateTv.setOnClickListener(new OnClick());
-        Calendar calendar = Calendar.getInstance();
-        String todayDate = String.format("%d-%d-%d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DAY_OF_MONTH));
-        dateTv.setText(todayDate);
+        setRemarkInput();
+        setDate();
 
         backIv = findViewById(R.id.single_record_iv_back);
         backIv.setOnClickListener(new OnClick());
@@ -55,10 +55,15 @@ public class SingleRecordActivity extends AppCompatActivity {
         }
     }
 
-    private void setInput(){
-        et = findViewById(R.id.input_money);
+    private void setMoneyInput(){
+        moneyEt = findViewById(R.id.input_money);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/bahnschrift.ttf");
-        et.setTypeface(tf);
+        moneyEt.setTypeface(tf);
+    }
+
+    private void setRemarkInput(){
+        remarkEt = findViewById(R.id.input_remark);
+        remarkEt.addTextChangedListener(new RemarkTextWatcher());
     }
 
     private void setTypeRow(){
@@ -68,6 +73,14 @@ public class SingleRecordActivity extends AppCompatActivity {
         typeTv = findViewById(R.id.typename_tv);
         typeIv.setImageResource(imageId);
         typeTv.setText(typename);
+    }
+
+    private void setDate(){
+        dateTv = findViewById(R.id.date_tv);
+        dateTv.setOnClickListener(new OnClick());
+        Calendar calendar = Calendar.getInstance();
+        String todayDate = String.format("%d-%d-%d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DAY_OF_MONTH));
+        dateTv.setText(todayDate);
     }
 
     private class OnClick implements View.OnClickListener, DatePickerDialog.OnDateSetListener{
@@ -92,13 +105,16 @@ public class SingleRecordActivity extends AppCompatActivity {
 
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-            date = String.format("%d-%d-%d", year, month+1, dayOfMonth);
-            dateTv.setText(date);
-            Log.d("记录日期",date);
+            String dateInfo = String.format("%d-%d-%d", year, month + 1, dayOfMonth);
+            dateTv.setText(dateInfo);
+            recordYear = year;
+            recordMonth = month + 1;
+            recordDayOfMonth = dayOfMonth;
+            Log.d("记录日期",dateInfo);
         }
     }
 
-    private class TextWatcher implements android.text.TextWatcher {
+    private class RemarkTextWatcher implements android.text.TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
