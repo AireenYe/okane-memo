@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Manage">
         <activity
+            android:name=".SingleRecordActivity"
+            android:exported="true" />
+        <activity
             android:name=".BookkeepingActivity"
             android:exported="true" />
         <activity

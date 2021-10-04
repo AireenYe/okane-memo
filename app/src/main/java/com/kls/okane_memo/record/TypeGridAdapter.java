@@ -1,6 +1,8 @@
 package com.kls.okane_memo.record;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +11,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kls.okane_memo.BookkeepingActivity;
 import com.kls.okane_memo.R;
+import com.kls.okane_memo.SingleRecordActivity;
 
 public class TypeGridAdapter extends RecyclerView.Adapter<TypeGridAdapter.GridViewHolder> {
     private Context mContext;
@@ -30,6 +34,7 @@ public class TypeGridAdapter extends RecyclerView.Adapter<TypeGridAdapter.GridVi
 
     @Override
     public void onBindViewHolder(TypeGridAdapter.GridViewHolder holder, final int position) {
+        // 根据Item的位置获得类型种类
         TypeBean type;
         if(kind == 1){
             type = typeList.getInTypeBean(position);
@@ -38,6 +43,21 @@ public class TypeGridAdapter extends RecyclerView.Adapter<TypeGridAdapter.GridVi
         }
         holder.textView.setText(type.getTypename());
         holder.imageView.setImageResource(type.getImageId());
+
+        // 设置每种类型的点击事件
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, SingleRecordActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("kind", type.getKind());
+                bundle.putString("typename", type.getTypename());
+                bundle.putInt("imageId", type.getImageId());
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+//                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+            }
+        });
     }
 
     @Override

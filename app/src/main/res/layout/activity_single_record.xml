@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SingleRecordActivity"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/single_record_top"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/black"
+        android:elevation="3dp">
+        <ImageView
+            android:id="@+id/single_record_iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/btn_back"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/single_record_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal"
+            android:text="@string/singleRecordTitle"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:typeface="sans" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/single_record_top"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:paddingTop="24dp"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp">
+        <TextView
+            android:id="@+id/kind_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/income"
+            android:textSize="12sp"
+            android:textColor="@color/grey"/>
+
+        <EditText
+            android:id="@+id/input_money"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_below="@id/kind_tv"
+            android:gravity="right"
+            android:inputType="numberDecimal|number"
+            android:paddingBottom="12dp"
+            android:background="@null"
+            android:textSize="64sp"
+            android:textColor="@color/black_light"
+            />
+
+        <View
+            android:id="@+id/outcome_line"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/input_money"
+            android:background="@color/grey_deep" />
+
+        <RelativeLayout
+            android:id="@+id/remark_rl"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/outcome_line"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/remark_iv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center" />
+
+            <EditText
+                android:id="@+id/input_remark"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_toRightOf="@id/remark_iv"
+                android:gravity="center_vertical"
+                android:hint="@string/remark"
+                android:textColorHint="@color/grey"
+                android:textColor="@color/black_light"
+                android:textSize="16sp"
+                android:typeface="sans" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/type_rl"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_below="@id/remark_rl">
+
+            <ImageView
+                android:id="@+id/type_iv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/typename_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_toRightOf="@id/type_iv"
+                android:gravity="center_vertical"
+                android:text="测试"
+                android:textColor="@color/black_light"
+                android:textSize="16sp"
+                android:typeface="sans"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/date_rl"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/type_rl"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/date_iv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_toRightOf="@id/date_iv"
+                android:gravity="center_vertical"
+                android:text="测试"
+                android:textColor="@color/black_light"
+                android:textSize="16sp"
+                android:typeface="sans" />
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/black"
+        app:srcCompat="@drawable/ic_correct" />
+
+</RelativeLayout>
