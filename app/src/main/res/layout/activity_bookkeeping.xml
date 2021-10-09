@@ -50,18 +50,20 @@
             android:text="@string/income"
             android:textSize="12sp"
             android:textColor="@color/grey"/>
+
         <View
             android:id="@+id/income_line"
             android:layout_width="80dp"
             android:layout_height="1dp"
             android:layout_below="@id/income_tv"
-            android:background="@color/grey_deep"/>
+            android:background="@color/grey_deep" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/record_in_gv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/income_line"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp" />
 
         <TextView
             android:id="@+id/outcome_tv"

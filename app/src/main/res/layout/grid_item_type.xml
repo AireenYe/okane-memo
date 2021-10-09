@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/item_type_iv"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_gravity="center"
         android:src="@mipmap/ic_eat"/>
     <TextView

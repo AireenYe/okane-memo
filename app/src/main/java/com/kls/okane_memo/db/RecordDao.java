@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Flowable;
+
 @Dao
 public interface RecordDao {
     @Query("select * from records where year = :year and month = :month and dayOfMonth = :dayOfMonth")
