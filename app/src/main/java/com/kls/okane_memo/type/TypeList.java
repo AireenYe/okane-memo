@@ -1,4 +1,4 @@
-package com.kls.okane_memo.record;
+package com.kls.okane_memo.type;
 
 import com.kls.okane_memo.R;
 
@@ -30,6 +30,19 @@ public class TypeList {
 
     public TypeBean getOutTypeBean(int id){
         return outTypeList.get(id);
+    }
+
+    public int getImageByName(String name)
+    {
+        for(TypeBean type : outTypeList){
+            if(type.getTypename() == name)
+                return type.getImageId();
+        }
+        for(TypeBean type : inTypeList){
+            if(type.getTypename() == name)
+                return type.getImageId();
+        }
+        return 0;
     }
 
     private TypeList() {

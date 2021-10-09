@@ -39,32 +39,32 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@+id/single_record_top"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:paddingTop="24dp"
+        android:layout_below="@+id/single_record_top"
         android:paddingStart="32dp"
+        android:paddingTop="24dp"
         android:paddingEnd="32dp">
+
         <TextView
             android:id="@+id/kind_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/income"
-            android:textSize="12sp"
-            android:textColor="@color/grey"/>
+            android:textColor="@color/grey"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/input_money"
             android:layout_width="match_parent"
             android:layout_height="96dp"
             android:layout_below="@id/kind_tv"
+            android:background="@null"
             android:gravity="right"
             android:inputType="numberDecimal|number"
             android:paddingBottom="12dp"
-            android:background="@null"
-            android:textSize="64sp"
             android:textColor="@color/black_light"
-            />
+            android:textSize="64sp" />
 
         <View
             android:id="@+id/outcome_line"
@@ -91,26 +91,29 @@
 
             <EditText
                 android:id="@+id/input_remark"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_toRightOf="@id/remark_iv"
+                android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="@string/remark"
-                android:textColorHint="@color/grey"
                 android:textColor="@color/black_light"
+                android:textColorHint="@color/grey"
                 android:textSize="16sp"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:lines="1"
+                android:inputType="text"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/type_rl"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center_vertical"
+            android:layout_below="@id/remark_rl"
             android:layout_marginStart="16dp"
-            android:layout_below="@id/remark_rl">
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
 
             <ImageView
                 android:id="@+id/type_iv"
@@ -129,7 +132,7 @@
                 android:text="测试"
                 android:textColor="@color/black_light"
                 android:textSize="16sp"
-                android:typeface="sans"/>
+                android:typeface="sans" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -151,7 +154,7 @@
 
             <TextView
                 android:id="@+id/date_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_toRightOf="@id/date_iv"
@@ -163,19 +166,18 @@
         </RelativeLayout>
 
 
-
     </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_finish"
+        android:id="@+id/finish_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="36dp"
         android:backgroundTint="@color/black"
         app:srcCompat="@drawable/ic_correct" />
 

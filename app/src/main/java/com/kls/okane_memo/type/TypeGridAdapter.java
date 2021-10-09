@@ -1,4 +1,4 @@
-package com.kls.okane_memo.record;
+package com.kls.okane_memo.type;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kls.okane_memo.BookkeepingActivity;
 import com.kls.okane_memo.R;
 import com.kls.okane_memo.SingleRecordActivity;
 
@@ -28,7 +27,6 @@ public class TypeGridAdapter extends RecyclerView.Adapter<TypeGridAdapter.GridVi
 
     @Override
     public TypeGridAdapter.GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         return new GridViewHolder(LayoutInflater.from(mContext).inflate(R.layout.grid_item_type,parent,false));
     }
 
@@ -45,11 +43,12 @@ public class TypeGridAdapter extends RecyclerView.Adapter<TypeGridAdapter.GridVi
         holder.imageView.setImageResource(type.getImageId());
 
         // 设置每种类型的点击事件
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, SingleRecordActivity.class);
                 Bundle bundle = new Bundle();
+                bundle.putBoolean("ifCreate", true);
                 bundle.putInt("kind", type.getKind());
                 bundle.putString("typename", type.getTypename());
                 bundle.putInt("imageId", type.getImageId());
