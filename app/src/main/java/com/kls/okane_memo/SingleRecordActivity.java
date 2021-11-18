@@ -30,7 +30,7 @@ public class SingleRecordActivity extends AppCompatActivity {
 
     DBManager dbm;
     EditText moneyEt, remarkEt;
-    ImageView backIv, typeIv, dateIv;
+    ImageView backIv, typeIv, dateIv, remarkIv;
     TextView kindTv, typeTv, dateTv;
     FloatingActionButton checkBtn;
     Bundle infoBundle;
@@ -72,8 +72,10 @@ public class SingleRecordActivity extends AppCompatActivity {
     }
 
     private void setRemarkInput(){
+        remarkIv = findViewById(R.id.remark_iv);
         remarkEt = findViewById(R.id.input_remark);
         remarkEt.addTextChangedListener(new RemarkTextWatcher());
+        remarkIv.setImageResource(R.drawable.ic_note);
     }
 
     private void setTypeRow(){
@@ -93,6 +95,7 @@ public class SingleRecordActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         String todayDate = String.format("%d-%d-%d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DAY_OF_MONTH));
         dateTv.setText(todayDate);
+        dateIv.setImageResource(R.drawable.ic_calendar);
     }
 
     private void setFloatingBtn(){
