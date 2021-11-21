@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">okane-memo</string>
+    <string name="income">收入</string>
+    <string name="outcome">支出</string>
+    <string name="bookkeepingTitle">选择类型</string>
+    <string name="singleRecordTitle">编辑记录</string>
+    <string name="remark">备注</string>
+</resources>

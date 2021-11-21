@@ -22,14 +22,14 @@ import com.kls.okane_memo.type.TypeList;
 
 import java.util.List;
 
-public class RecordLinearAdpater extends RecyclerView.Adapter<RecordLinearAdpater.LinearViewHolder> {
+public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapter.LinearViewHolder> {
     private Context context;
     int year, month, dayOfMonth;
     private List<Record> records;
     private Record record;
     int imageId;
 
-    public RecordLinearAdpater(Context context, int year, int month, int dayOfMonth){
+    public RecordLinearAdapter(Context context, int year, int month, int dayOfMonth){
         this.context = context;
         this.year = year;
         this.month = month;

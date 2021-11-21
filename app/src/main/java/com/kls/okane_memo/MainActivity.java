@@ -16,7 +16,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.kls.okane_memo.record.RecordLinearAdpater;
+import com.kls.okane_memo.record.RecordLinearAdapter;
 
 import java.util.Calendar;
 
