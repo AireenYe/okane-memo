@@ -16,14 +16,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.kls.okane_memo.db.DBManager;
+import com.kls.okane_memo.db.Injection;
 import com.kls.okane_memo.db.Record;
 import com.kls.okane_memo.record.RecordLinearAdapter;
-import com.kls.okane_memo.record.RecordViewModel;
+import com.kls.okane_memo.ui.RecordViewModel;
+import com.kls.okane_memo.ui.ViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements
         View.OnClickListener,
@@ -34,9 +41,11 @@ public class MainActivity extends AppCompatActivity implements
     private TextView inTv, outTv;
     private RecyclerView recordRv;
     private int year, month, dayOfMonth;
-    RecordLinearAdapter adapter;
-    private List<Record> records;
-    RecordViewModel recordViewModel;
+    private RecordLinearAdapter adapter;
+    private List<Record> recordList;
+    private RecordViewModel recordViewModel;
+    private ViewModelFactory viewModelFactory;
+    private final CompositeDisposable disposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +55,16 @@ public class MainActivity extends AppCompatActivity implements
         initShow();
 
     }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        disposable.add(recordViewModel.getRecord()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(records -> this.records = records,
+//                        throwable -> Log.d("MainActivity", "Unable to get username", throwable)));
+//    }
 
     void initShow(){
         // 设置日期显示选择
@@ -67,24 +86,37 @@ public class MainActivity extends AppCompatActivity implements
 
         // 有问题，显示不了
         // 设置显示的记录
+        recordList = new ArrayList<>();
+        adapter = new RecordLinearAdapter(this, year, month, dayOfMonth, recordList);
         recordRv = findViewById(R.id.record_lv);
         recordRv.setLayoutManager(new LinearLayoutManager(this));
-        records = new ArrayList<>();
-        adapter = new RecordLinearAdapter(this, year, month, dayOfMonth, records);
         recordRv.setAdapter(adapter);
 
-        // 获取ViewModel
-        recordViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(RecordViewModel.class);
-        recordViewModel.getAllRecords().observe(this, new Observer<List<Record>>()
-        {
-            @Override
-            public void onChanged(List<Record> records)
-            {
-                records.clear();
-                records.addAll(records);
-                adapter.notifyDataSetChanged();
-            }
-        });
+        viewModelFactory = Injection.provideViewModelFactory(this);
+        recordViewModel = new ViewModelProvider(this, viewModelFactory).get(RecordViewModel.class);
+
+        recordList.add(new Record("学习", -1, 12, 2021, 11, 20, "测试2"));
+        recordList.add(new Record("学习", -1, 13, 2021, 11, 20, "测试3"));
+
+
+
+        recordViewModel.getRecord()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Record>>() {
+                    @Override
+                    public void accept(List<Record> records) throws Exception {
+                        Log.d("MainActivity", "监测数据");
+                        recordList = records;
+                        adapter.setRecords(recordList);
+                        adapter.notifyDataSetChanged();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
 
         // 设置记录按钮
         recordBtn = findViewById(R.id.btn_record);
@@ -117,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH));
                 dialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                Log.d("Adapter里面的条目数", String.valueOf(adapter.getItemCount()));
                 dialog.show();
                 break;
         }

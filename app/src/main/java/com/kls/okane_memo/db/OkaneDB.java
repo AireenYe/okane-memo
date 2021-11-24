@@ -17,6 +17,7 @@ public abstract class OkaneDB extends RoomDatabase {
     public static synchronized OkaneDB getInstance(Context context){
         if(okaneDB == null){
             okaneDB = Room.databaseBuilder(context.getApplicationContext(), OkaneDB.class, dbName).
+                    allowMainThreadQueries().
                     build();
         }
         return okaneDB;

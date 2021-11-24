@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kls.okane_memo.R;
 import com.kls.okane_memo.SingleRecordActivity;
-import com.kls.okane_memo.db.DBManager;
 import com.kls.okane_memo.db.Record;
 import com.kls.okane_memo.type.TypeList;
 
@@ -26,7 +25,6 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
     private Context context;
     int year, month, dayOfMonth;
     private List<Record> records;
-    private Record record;
     int imageId;
 
     public RecordLinearAdapter(Context context, int year, int month, int dayOfMonth, List<Record> records){
@@ -46,12 +44,13 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
 
     @Override
     public void onBindViewHolder(@NonNull LinearViewHolder holder, int position) {
-        record = records.get(position);
+        Record record = records.get(position);
         holder.moneyTv.setText(String.valueOf(record.getMoney()));
         holder.typeTv.setText(record.getTypename());
         imageId = TypeList.getInstance().getImageByName(record.getTypename());
         if(imageId == 0){
             // 抛出异常
+            Log.d("RecordLinearAdapter", "找不到图片 " + record.getTypename());
         }
         holder.typeIv.setImageResource(imageId);
 
@@ -88,5 +87,9 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
             typeIv = itemView.findViewById(R.id.item_record_iv);
             typeTv = itemView.findViewById(R.id.item_record_typename);
         }
+    }
+
+    public void setRecords(List<Record> records){
+        this.records = records;
     }
 }

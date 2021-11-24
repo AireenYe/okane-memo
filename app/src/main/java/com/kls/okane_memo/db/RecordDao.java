@@ -11,19 +11,22 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
+
 @Dao
 public interface RecordDao {
     @Query("select * from records where year = :year and month = :month and dayOfMonth = :dayOfMonth")
-    LiveData<List<Record>> getRecordByDate(int year, int month, int dayOfMonth);
+    Flowable<List<Record>> getRecordByDate(int year, int month, int dayOfMonth);
 
     @Query("select * from records where year = :year and month = :month")
-    LiveData<List<Record>> getRecordByMonth(int year, int month);
+    Flowable<List<Record>> getRecordByMonth(int year, int month);
 
     @Query("select *from records")
-    LiveData<List<Record>> getAllRecord();
+    Flowable<List<Record>> getAllRecord();
 
     @Insert
-    void insertRecord(Record record);
+    Completable insertRecord(Record record);
 
     @Delete
     void deleteRecordById(Record record);

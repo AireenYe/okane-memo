@@ -1,9 +1,5 @@
 package com.kls.okane_memo;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -17,17 +13,31 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.kls.okane_memo.db.DBManager;
-import com.kls.okane_memo.record.RecordViewModel;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
-import java.time.LocalDate;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.kls.okane_memo.db.Injection;
+import com.kls.okane_memo.db.Record;
+import com.kls.okane_memo.ui.RecordViewModel;
+import com.kls.okane_memo.ui.ViewModelFactory;
+
 import java.util.Calendar;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class SingleRecordActivity extends AppCompatActivity {
 
     RecordViewModel recordViewModel;
+    ViewModelFactory viewModelFactory;
+    Record mRecord;
+    private final CompositeDisposable disposable = new CompositeDisposable();
     EditText moneyEt, remarkEt;
     ImageView backIv, typeIv, dateIv, remarkIv;
     TextView kindTv, typeTv, dateTv;
@@ -53,6 +63,14 @@ public class SingleRecordActivity extends AppCompatActivity {
 
         backIv = findViewById(R.id.single_record_iv_back);
         backIv.setOnClickListener(new OnClick());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // clear all the subscriptions
+        disposable.clear();
     }
 
     private void setKindString(){
@@ -93,6 +111,9 @@ public class SingleRecordActivity extends AppCompatActivity {
         dateIv.setOnClickListener(new OnClick());
         dateTv.setOnClickListener(new OnClick());
         Calendar calendar = Calendar.getInstance();
+        recordYear = calendar.get(Calendar.YEAR);
+        recordMonth = calendar.get(Calendar.MONTH) + 1;
+        recordDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         String todayDate = String.format("%d-%d-%d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DAY_OF_MONTH));
         dateTv.setText(todayDate);
         dateIv.setImageResource(R.drawable.ic_calendar);
@@ -122,9 +143,9 @@ public class SingleRecordActivity extends AppCompatActivity {
                     dialog.show();
                     break;
                 case R.id.finish_btn:
-                    money = Double.parseDouble(moneyEt.getText().toString());
-                    remarkInfo = remarkEt.getText().toString();
-                    if(money != 0){
+                    if(moneyEt.getText().toString() != null){
+                        money = Double.parseDouble(moneyEt.getText().toString());
+                        remarkInfo = remarkEt.getText().toString();
                         applyChange();
                     }
                     Intent intent = new Intent(SingleRecordActivity.this, MainActivity.class);
@@ -146,15 +167,24 @@ public class SingleRecordActivity extends AppCompatActivity {
     }
 
     private void initDB(){
-        recordViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(RecordViewModel.class);
+        viewModelFactory = Injection.provideViewModelFactory(this);
+        recordViewModel = new ViewModelProvider(this, viewModelFactory).get(RecordViewModel.class);
     }
 
     private void applyChange(){
-        Log.d("添加", typename);
+        Log.d("SingleRecordActivity", "修改数据");
         if(infoBundle.getBoolean("ifCreate"))
-            recordViewModel.insertRecord(typename, kind, money, recordYear, recordMonth, recordDayOfMonth, remarkInfo);
+        {
+            mRecord = new Record(typename, kind, money, recordYear, recordMonth, recordDayOfMonth, remarkInfo);
+            disposable.add(recordViewModel.insertRecord(mRecord)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe());
+        }
         else
-            recordViewModel.updateRecord(infoBundle.getInt("id"), typename, kind, money, recordYear, recordMonth, recordDayOfMonth, remarkInfo);
+        {
+
+        }
     }
 
     private class RemarkTextWatcher implements android.text.TextWatcher {
