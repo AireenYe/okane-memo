@@ -2,6 +2,7 @@ package com.kls.okane_memo;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -9,7 +10,6 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -19,8 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kls.okane_memo.db.DBManager;
-import com.kls.okane_memo.db.OkaneDB;
-import com.kls.okane_memo.db.Record;
+import com.kls.okane_memo.record.RecordViewModel;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -28,7 +27,7 @@ import java.util.Calendar;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class SingleRecordActivity extends AppCompatActivity {
 
-    DBManager dbm;
+    RecordViewModel recordViewModel;
     EditText moneyEt, remarkEt;
     ImageView backIv, typeIv, dateIv, remarkIv;
     TextView kindTv, typeTv, dateTv;
@@ -147,14 +146,15 @@ public class SingleRecordActivity extends AppCompatActivity {
     }
 
     private void initDB(){
-        dbm = new DBManager(this);
+        recordViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(RecordViewModel.class);
     }
 
     private void applyChange(){
+        Log.d("添加", typename);
         if(infoBundle.getBoolean("ifCreate"))
-            dbm.insert(typename, kind, money, recordYear, recordMonth, recordDayOfMonth, remarkInfo);
+            recordViewModel.insertRecord(typename, kind, money, recordYear, recordMonth, recordDayOfMonth, remarkInfo);
         else
-            dbm.update(infoBundle.getInt("id"), typename, kind, money, recordYear, recordMonth, recordDayOfMonth, remarkInfo);
+            recordViewModel.updateRecord(infoBundle.getInt("id"), typename, kind, money, recordYear, recordMonth, recordDayOfMonth, remarkInfo);
     }
 
     private class RemarkTextWatcher implements android.text.TextWatcher {

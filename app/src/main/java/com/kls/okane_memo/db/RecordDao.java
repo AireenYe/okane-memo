@@ -1,5 +1,6 @@
 package com.kls.okane_memo.db;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -10,16 +11,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Flowable;
-
 @Dao
 public interface RecordDao {
     @Query("select * from records where year = :year and month = :month and dayOfMonth = :dayOfMonth")
-    Flowable<List<Record>> getRecordByDate(int year, int month, int dayOfMonth);
+    LiveData<List<Record>> getRecordByDate(int year, int month, int dayOfMonth);
+
+    @Query("select * from records where year = :year and month = :month")
+    LiveData<List<Record>> getRecordByMonth(int year, int month);
+
+    @Query("select *from records")
+    LiveData<List<Record>> getAllRecord();
 
     @Insert
-    Completable insertRecord(Record record);
+    void insertRecord(Record record);
 
     @Delete
     void deleteRecordById(Record record);

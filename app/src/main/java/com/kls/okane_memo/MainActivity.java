@@ -1,25 +1,25 @@
 package com.kls.okane_memo;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kls.okane_memo.db.DBManager;
-import com.kls.okane_memo.db.OkaneDB;
 import com.kls.okane_memo.db.Record;
 import com.kls.okane_memo.record.RecordLinearAdapter;
+import com.kls.okane_memo.record.RecordViewModel;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,17 +34,20 @@ public class MainActivity extends AppCompatActivity implements
     private TextView inTv, outTv;
     private RecyclerView recordRv;
     private int year, month, dayOfMonth;
-    private DBManager dbManager;
+    RecordLinearAdapter adapter;
+    private List<Record> records;
+    RecordViewModel recordViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        init();
+        initShow();
+
     }
 
-    void init(){
+    void initShow(){
         // 设置日期显示选择
         dateTextView = findViewById(R.id.datePicker);
         dateTextView.setOnClickListener(this);
@@ -62,14 +65,26 @@ public class MainActivity extends AppCompatActivity implements
         inTv.setTypeface(tf);
         outTv.setTypeface(tf);
 
-        // 有问题，不能在主线程中使用Room，百度后台使用Room的方法
-        // 曾在Builder调用allowMainThreadQueries()方法，不知为何，无法从数据库中抓取数据
+        // 有问题，显示不了
         // 设置显示的记录
         recordRv = findViewById(R.id.record_lv);
         recordRv.setLayoutManager(new LinearLayoutManager(this));
-        List<Record> records = new ArrayList<>();
-        recordRv.setAdapter(new RecordLinearAdapter(this, year, month, dayOfMonth, records));
-        dbManager = new DBManager(this);
+        records = new ArrayList<>();
+        adapter = new RecordLinearAdapter(this, year, month, dayOfMonth, records);
+        recordRv.setAdapter(adapter);
+
+        // 获取ViewModel
+        recordViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(RecordViewModel.class);
+        recordViewModel.getAllRecords().observe(this, new Observer<List<Record>>()
+        {
+            @Override
+            public void onChanged(List<Record> records)
+            {
+                records.clear();
+                records.addAll(records);
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         // 设置记录按钮
         recordBtn = findViewById(R.id.btn_record);
