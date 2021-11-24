@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements
         inTv.setTypeface(tf);
         outTv.setTypeface(tf);
 
-        // 有问题，显示不了
         // 设置显示的记录
         recordList = new ArrayList<>();
         adapter = new RecordLinearAdapter(this, year, month, dayOfMonth, recordList);
@@ -95,11 +94,6 @@ public class MainActivity extends AppCompatActivity implements
         viewModelFactory = Injection.provideViewModelFactory(this);
         recordViewModel = new ViewModelProvider(this, viewModelFactory).get(RecordViewModel.class);
 
-        recordList.add(new Record("学习", -1, 12, 2021, 11, 20, "测试2"));
-        recordList.add(new Record("学习", -1, 13, 2021, 11, 20, "测试3"));
-
-
-
         recordViewModel.getRecord()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -108,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements
                     public void accept(List<Record> records) throws Exception {
                         Log.d("MainActivity", "监测数据");
                         recordList = records;
+                        updateTotalShow();
                         adapter.setRecords(recordList);
                         adapter.notifyDataSetChanged();
                     }
@@ -153,6 +148,20 @@ public class MainActivity extends AppCompatActivity implements
                 dialog.show();
                 break;
         }
+    }
+
+    void updateTotalShow(){
+        double outTotal = 0, inTotal = 0;
+
+        for(Record record : recordList){
+            if(record.getKind() == 1)
+                inTotal += record.getMoney();
+            else
+                outTotal += record.getMoney();
+        }
+
+        outTv.setText(String.valueOf(outTotal));
+        inTv.setText(String.valueOf(inTotal));
     }
 
 }

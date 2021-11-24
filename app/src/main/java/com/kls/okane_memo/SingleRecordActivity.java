@@ -87,6 +87,12 @@ public class SingleRecordActivity extends AppCompatActivity {
         moneyEt = findViewById(R.id.input_money);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/bahnschrift.ttf");
         moneyEt.setTypeface(tf);
+        double moneyValue = infoBundle.getDouble("money");
+        if (moneyValue != 0)
+        {
+            money = moneyValue;
+            moneyEt.setText(String.valueOf(moneyValue));
+        }
     }
 
     private void setRemarkInput(){
@@ -94,6 +100,12 @@ public class SingleRecordActivity extends AppCompatActivity {
         remarkEt = findViewById(R.id.input_remark);
         remarkEt.addTextChangedListener(new RemarkTextWatcher());
         remarkIv.setImageResource(R.drawable.ic_note);
+        String remark = infoBundle.getString("remarkInfo");
+        if(remark != null)
+        {
+            remarkInfo = remark;
+            remarkEt.setText(remarkInfo);
+        }
     }
 
     private void setTypeRow(){
@@ -110,12 +122,27 @@ public class SingleRecordActivity extends AppCompatActivity {
         dateIv = findViewById(R.id.date_iv);
         dateIv.setOnClickListener(new OnClick());
         dateTv.setOnClickListener(new OnClick());
-        Calendar calendar = Calendar.getInstance();
-        recordYear = calendar.get(Calendar.YEAR);
-        recordMonth = calendar.get(Calendar.MONTH) + 1;
-        recordDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        String todayDate = String.format("%d-%d-%d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DAY_OF_MONTH));
-        dateTv.setText(todayDate);
+
+        int yearInfo = infoBundle.getInt("year");
+        int monthInfo = infoBundle.getInt("month");
+        int dayOfMonthInfo = infoBundle.getInt("dayOfMonth");
+
+        if(yearInfo != 0)
+        {
+            recordYear = yearInfo;
+            recordMonth = monthInfo;
+            recordDayOfMonth = dayOfMonthInfo;
+        }
+        else
+        {
+            Calendar calendar = Calendar.getInstance();
+            recordYear = calendar.get(Calendar.YEAR);
+            recordMonth = calendar.get(Calendar.MONTH) + 1;
+            recordDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        }
+
+        String date = String.format("%d-%d-%d", recordYear, recordMonth, recordDayOfMonth);
+        dateTv.setText(date);
         dateIv.setImageResource(R.drawable.ic_calendar);
     }
 
@@ -183,7 +210,12 @@ public class SingleRecordActivity extends AppCompatActivity {
         }
         else
         {
-
+            mRecord = new Record(typename, kind, money, recordYear, recordMonth, recordDayOfMonth, remarkInfo);
+            mRecord.setId(infoBundle.getInt("id"));
+            disposable.add(recordViewModel.updateRecord(mRecord)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe());
         }
     }
 

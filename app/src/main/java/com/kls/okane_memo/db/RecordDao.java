@@ -32,5 +32,5 @@ public interface RecordDao {
     void deleteRecordById(Record record);
 
     @Update
-    void updateRecord(Record record);
+    Completable updateRecord(Record record);
 }

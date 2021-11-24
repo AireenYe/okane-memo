@@ -35,6 +35,13 @@ public class LocalDataSource implements DataSource {
         return recordDao.insertRecord(record);
     }
 
+    @Override
+    public Completable updateRecord(Record record) {
+        return recordDao.updateRecord(record);
+    }
+
+
+
 //    @Override
 //    public void deleteAllUsers() {
 //        recordDao.deleteAllUsers();

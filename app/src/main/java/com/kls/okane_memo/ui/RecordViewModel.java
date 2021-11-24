@@ -48,21 +48,9 @@ public class RecordViewModel extends ViewModel
     public Completable insertRecord(final Record record) {
         return mDataSource.insertRecord(record);
     }
-//
-//    /**
-//     * Update the user name.
-//     *
-//     * @param userName the new user name
-//     * @return a {@link Completable} that completes when the user name is updated
-//     */
-//    public Completable updateUserName(final String userName) {
-//        // if there's no user, create a new user.
-//        // if we already have a user, then, since the user object is immutable,
-//        // create a new user, with the id of the previous user and the updated user name.
-//        mUser = mUser == null
-//                ? new User(userName)
-//                : new User(mUser.getId(), userName);
-//        return mDataSource.insertOrUpdateUser(mUser);
-//    }
+
+    public Completable updateRecord(final Record record){
+        return mDataSource.updateRecord(record);
+    }
 
 }

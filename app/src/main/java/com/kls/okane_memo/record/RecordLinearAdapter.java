@@ -62,9 +62,15 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("ifCreate", false);
                 bundle.putInt("id", record.getId());
+                bundle.putDouble("money", record.getMoney());
                 bundle.putInt("kind", record.getKind());
+                bundle.putInt("year", record.getYear());
+                bundle.putInt("month", record.getMonth());
+                bundle.putInt("dayOfMonth", record.getDayOfMonth());
                 bundle.putString("typename", record.getTypename());
+                bundle.putString("remarkInfo", record.getRemark());
                 bundle.putInt("imageId", imageId);
+                bundle.putBoolean("ifCreate", false);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
