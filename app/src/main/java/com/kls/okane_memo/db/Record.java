@@ -13,13 +13,13 @@ public class Record {
 
     String typename;    // 类型名称
     int kind;   // 类型，1为收入，-1为支出
-    int money;  // 金额
+    double money;  // 金额
     int year;   // 年份
     int month;  // 月份
     int dayOfMonth;     // 日期
     String remark;      // 备注
 
-    public Record(String typename, int kind, int money, int year, int month, int dayOfMonth, String remark) {
+    public Record(String typename, int kind, double money, int year, int month, int dayOfMonth, String remark) {
         this.typename = typename;
         this.kind = kind;
         this.money = money;
@@ -33,7 +33,7 @@ public class Record {
         this.id = id;
     }
 
-    public int getMoney() {
+    public double getMoney() {
         return money;
     }
 

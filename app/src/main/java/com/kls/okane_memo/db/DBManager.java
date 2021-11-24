@@ -4,6 +4,9 @@ import android.content.Context;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
+
 public class DBManager {
     private OkaneDB db;
 
@@ -11,18 +14,18 @@ public class DBManager {
         db = OkaneDB.getInstance(context.getApplicationContext());
     }
 
-    public void insert(String typename, int kind, int money, int year, int month, int dayOfMonth, String remark){
+    public Completable insert(String typename, int kind, double money, int year, int month, int dayOfMonth, String remark){
         Record record = new Record(typename, kind, money, year, month, dayOfMonth, remark);
-        db.recordDao().insertRecord(record);
+        return db.recordDao().insertRecord(record);
     }
 
-    public void update(int id, String typename, int kind, int money, int year, int month, int dayOfMonth, String remark){
+    public void update(int id, String typename, int kind, double money, int year, int month, int dayOfMonth, String remark){
         Record record = new Record(typename, kind, money, year, month, dayOfMonth, remark);
         record.setId(id);
         db.recordDao().updateRecord(record);
     }
 
-    public List<Record> getRecordByDate(int year, int month, int dayOfMonth){
+    public Flowable<List<Record>> getRecordByDate(int year, int month, int dayOfMonth){
         return db.recordDao().getRecordByDate(year, month, dayOfMonth);
     }
 

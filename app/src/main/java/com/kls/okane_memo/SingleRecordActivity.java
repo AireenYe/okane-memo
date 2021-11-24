@@ -35,7 +35,8 @@ public class SingleRecordActivity extends AppCompatActivity {
     FloatingActionButton checkBtn;
     Bundle infoBundle;
     String typename, remarkInfo;
-    int kind, money, recordYear, recordMonth, recordDayOfMonth;
+    int kind, recordYear, recordMonth, recordDayOfMonth;
+    double money;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +123,8 @@ public class SingleRecordActivity extends AppCompatActivity {
                     dialog.show();
                     break;
                 case R.id.finish_btn:
+                    money = Double.parseDouble(moneyEt.getText().toString());
+                    remarkInfo = remarkEt.getText().toString();
                     if(money != 0){
                         applyChange();
                     }
