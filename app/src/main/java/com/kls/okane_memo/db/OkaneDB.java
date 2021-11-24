@@ -10,8 +10,10 @@ import androidx.room.RoomDatabase;
 public abstract class OkaneDB extends RoomDatabase {
     private static final String dbName = "okane-db";
 
+    // 单例模式
     private static OkaneDB okaneDB;
 
+    // synchronized 保证在并发情况下只会执行一次
     public static synchronized OkaneDB getInstance(Context context){
         if(okaneDB == null){
             okaneDB = Room.databaseBuilder(context.getApplicationContext(), OkaneDB.class, dbName).

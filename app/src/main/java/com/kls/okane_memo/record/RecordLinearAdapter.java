@@ -29,13 +29,13 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
     private Record record;
     int imageId;
 
-    public RecordLinearAdapter(Context context, int year, int month, int dayOfMonth){
+    public RecordLinearAdapter(Context context, int year, int month, int dayOfMonth, List<Record> records){
         this.context = context;
         this.year = year;
         this.month = month;
         this.dayOfMonth = dayOfMonth;
         // 找到当天的记录列表
-        records = new DBManager(context.getApplicationContext()).getRecordByDate(year, month, dayOfMonth);
+        this.records = records;
     }
 
     @NonNull

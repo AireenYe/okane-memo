@@ -16,9 +16,14 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.kls.okane_memo.db.DBManager;
+import com.kls.okane_memo.db.OkaneDB;
+import com.kls.okane_memo.db.Record;
 import com.kls.okane_memo.record.RecordLinearAdapter;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
         View.OnClickListener,
@@ -29,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements
     private TextView inTv, outTv;
     private RecyclerView recordRv;
     private int year, month, dayOfMonth;
+    private DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +65,11 @@ public class MainActivity extends AppCompatActivity implements
         // 有问题，不能在主线程中使用Room，百度后台使用Room的方法
         // 曾在Builder调用allowMainThreadQueries()方法，不知为何，无法从数据库中抓取数据
         // 设置显示的记录
-//        recordRv = findViewById(R.id.record_lv);
-//        recordRv.setLayoutManager(new LinearLayoutManager(this));
-//        recordRv.setAdapter(new RecordLinearAdpater(this, year, month, dayOfMonth));
+        recordRv = findViewById(R.id.record_lv);
+        recordRv.setLayoutManager(new LinearLayoutManager(this));
+        List<Record> records = new ArrayList<>();
+        recordRv.setAdapter(new RecordLinearAdapter(this, year, month, dayOfMonth, records));
+        dbManager = new DBManager(this);
 
         // 设置记录按钮
         recordBtn = findViewById(R.id.btn_record);

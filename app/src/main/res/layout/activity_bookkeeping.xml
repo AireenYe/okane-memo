@@ -81,12 +81,12 @@
             android:layout_below="@id/outcome_tv"
             android:background="@color/grey_deep"
             />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/record_out_gv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/outcome_line"
-            android:layout_marginTop="16dp"
-            />
+            android:layout_marginTop="16dp" />
     </RelativeLayout>
 </LinearLayout>
