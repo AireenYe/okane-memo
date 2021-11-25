@@ -25,6 +25,8 @@ public interface DataSource {
 
     Completable updateRecord(Record record);
 
+    void deleteRecord(Record record);
+
 //    /**
 //     * Deletes all users from the data source.
 //     */

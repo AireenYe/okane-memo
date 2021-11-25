@@ -45,9 +45,10 @@ public class LocalDataSource implements DataSource {
         return recordDao.getRecordByMonth(year, month);
     }
 
-
-
-
+    @Override
+    public void deleteRecord(Record record){
+        recordDao.deleteRecordById(record);
+    }
 
 //    @Override
 //    public void deleteAllUsers() {

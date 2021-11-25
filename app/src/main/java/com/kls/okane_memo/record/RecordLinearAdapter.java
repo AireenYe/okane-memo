@@ -1,30 +1,43 @@
 package com.kls.okane_memo.record;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kls.okane_memo.R;
 import com.kls.okane_memo.SingleRecordActivity;
+import com.kls.okane_memo.db.Injection;
 import com.kls.okane_memo.db.Record;
+import com.kls.okane_memo.util.PopupList;
+import com.kls.okane_memo.util.RecordViewModel;
+import com.kls.okane_memo.util.ViewModelFactory;
 import com.kls.okane_memo.util.type.TypeList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapter.LinearViewHolder> {
     private Context context;
     int year, month, dayOfMonth;
     private List<Record> records;
+    private List<String> popupMenuItemList = new ArrayList<>();
     int imageId;
 
     public RecordLinearAdapter(Context context, int year, int month, int dayOfMonth, List<Record> records){
@@ -34,6 +47,7 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
         this.dayOfMonth = dayOfMonth;
         // 找到当天的记录列表
         this.records = records;
+        popupMenuItemList.add(context.getString(R.string.delete));
     }
 
     @NonNull
@@ -75,6 +89,45 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
                 context.startActivity(intent);
             }
         });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                int[] location = new int[2];
+                view.getLocationOnScreen(location);
+                PopupList popupList = new PopupList(view.getContext());
+                popupList.showPopupListWindow(view, holder.getAdapterPosition(), location[0] + view.getWidth() / 2,
+                        location[1], popupMenuItemList, new PopupList.PopupListListener() {
+                            @Override
+                            public boolean showPopupList(View adapterView, View contextView, int contextPosition) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onPopupListClick(View contextView, int contextPosition, int position) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setMessage("确定删除该记录？")
+                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                RecordViewModel recordViewModel;
+                                                ViewModelFactory viewModelFactory;
+                                                viewModelFactory = Injection.provideViewModelFactory(context);
+                                                recordViewModel = new ViewModelProvider((ViewModelStoreOwner) context, viewModelFactory).get(RecordViewModel.class);
+                                                recordViewModel.deleteRecord(record);
+                                            }
+                                        })
+                                        .setNeutralButton("取消", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            }
+                                        }).show();
+                            }
+                        });
+                return true;
+            }
+        });
     }
 
     @Override
@@ -98,4 +151,5 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
     public void setRecords(List<Record> records){
         this.records = records;
     }
+
 }

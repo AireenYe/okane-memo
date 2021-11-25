@@ -46,4 +46,8 @@ public class RecordViewModel extends ViewModel
         return mDataSource.updateRecord(record);
     }
 
+    public void deleteRecord(final Record record){
+        mDataSource.deleteRecord(record);
+    }
+
 }
