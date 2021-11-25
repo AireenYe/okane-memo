@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -34,6 +35,7 @@ public class SingleRecordActivity extends AppCompatActivity {
 
     RecordViewModel recordViewModel;
     ViewModelFactory viewModelFactory;
+    RelativeLayout typeRl;
     Record mRecord;
     private final CompositeDisposable disposable = new CompositeDisposable();
     EditText moneyEt, remarkEt;
@@ -113,6 +115,19 @@ public class SingleRecordActivity extends AppCompatActivity {
         typeTv = findViewById(R.id.typename_tv);
         typeIv.setImageResource(imageId);
         typeTv.setText(typename);
+
+        typeRl = findViewById(R.id.type_rl);
+        typeRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(infoBundle.getBoolean("ifCreate"))
+                {
+                    Intent intent = new Intent(SingleRecordActivity.this, BookkeepingActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                }
+            }
+        });
     }
 
     private void setDate(){

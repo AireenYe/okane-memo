@@ -38,7 +38,6 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
     int year, month, dayOfMonth;
     private List<Record> records;
     private List<String> popupMenuItemList = new ArrayList<>();
-    int imageId;
 
     public RecordLinearAdapter(Context context, int year, int month, int dayOfMonth, List<Record> records){
         this.context = context;
@@ -60,8 +59,12 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
     public void onBindViewHolder(@NonNull LinearViewHolder holder, int position) {
         Record record = records.get(records.size() - 1 - position);
         holder.moneyTv.setText(String.valueOf(record.getMoney()));
-        holder.typeTv.setText(record.getTypename());
-        imageId = TypeList.getInstance().getImageByName(record.getTypename());
+        String remark = record.getRemark();
+        if(remark == null || remark.length() == 0)
+            holder.typeTv.setText(record.getTypename());
+        else
+            holder.typeTv.setText(remark);
+        int imageId = TypeList.getInstance().getImageByName(record.getTypename());
         if(imageId == 0){
             // 抛出异常
             Log.d("RecordLinearAdapter", "找不到图片 " + record.getTypename());

@@ -55,16 +55,6 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        disposable.add(recordViewModel.getRecord()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(records -> this.records = records,
-//                        throwable -> Log.d("MainActivity", "Unable to get username", throwable)));
-//    }
-
     void initShow(){
         // 设置日期显示选择
         dateTextView = findViewById(R.id.datePicker);
