@@ -40,6 +40,13 @@ public class LocalDataSource implements DataSource {
         return recordDao.updateRecord(record);
     }
 
+    @Override
+    public Flowable<List<Record>> getRecordByMonth(int year, int month){
+        return recordDao.getRecordByMonth(year, month);
+    }
+
+
+
 
 
 //    @Override

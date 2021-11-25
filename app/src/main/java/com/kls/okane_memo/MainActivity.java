@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements
         viewModelFactory = Injection.provideViewModelFactory(this);
         recordViewModel = new ViewModelProvider(this, viewModelFactory).get(RecordViewModel.class);
 
-        recordViewModel.getRecord()
+        recordViewModel.getRecordByDate(year, month, dayOfMonth)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Record>>() {

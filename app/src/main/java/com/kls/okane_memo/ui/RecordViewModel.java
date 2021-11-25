@@ -31,13 +31,11 @@ public class RecordViewModel extends ViewModel
      * @return a {@link Flowable} that will emit every time the user name has been updated.
      */
     public Flowable<List<Record>> getRecordByDate(int year, int month, int dayOfmonth) {
-//        return mDataSource.getRecord()
-//                // for every emission of the user, get the user name
-//                .map(user -> {
-//                    mUser = user;
-//                    return user.getUserName();
-//                });
             return mDataSource.getRecordByDate(year, month, dayOfmonth);
+    }
+
+    public Flowable<List<Record>> getRecordByMonth(int year, int month) {
+        return mDataSource.getRecordByMonth(year, month);
     }
 
     public Flowable<List<Record>> getRecord() {

@@ -19,11 +19,8 @@ public interface DataSource {
 
     Flowable<List<Record>> getRecordByDate(int year, int month, int dayOfMonth);
 
-    /**
-     * Inserts the user into the data source, or, if this is an existing user, updates it.
-     *
-     * @param record the record to be inserted or updated.
-     */
+    Flowable<List<Record>> getRecordByMonth(int year, int month);
+
     Completable insertRecord(Record record);
 
     Completable updateRecord(Record record);
