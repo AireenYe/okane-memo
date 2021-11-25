@@ -1,4 +1,4 @@
-package com.kls.okane_memo.type;
+package com.kls.okane_memo.util.type;
 
 import com.kls.okane_memo.R;
 

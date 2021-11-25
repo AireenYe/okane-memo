@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kls.okane_memo.type.TypeGridAdapter;
+import com.kls.okane_memo.util.type.TypeGridAdapter;
 
 public class BookkeepingActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.kls.okane_memo.type;
+package com.kls.okane_memo.util.type;
 
 import android.content.Context;
 import android.content.Intent;

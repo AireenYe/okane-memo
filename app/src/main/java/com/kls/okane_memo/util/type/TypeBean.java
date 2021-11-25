@@ -1,4 +1,4 @@
-package com.kls.okane_memo.type;
+package com.kls.okane_memo.util.type;
 
 public class TypeBean {
     int typeId;     // 类型id

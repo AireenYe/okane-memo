@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kls.okane_memo.R;
 import com.kls.okane_memo.SingleRecordActivity;
 import com.kls.okane_memo.db.Record;
-import com.kls.okane_memo.type.TypeList;
+import com.kls.okane_memo.util.type.TypeList;
 
 import java.util.List;
 
