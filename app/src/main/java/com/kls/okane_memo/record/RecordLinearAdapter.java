@@ -44,7 +44,7 @@ public class RecordLinearAdapter extends RecyclerView.Adapter<RecordLinearAdapte
 
     @Override
     public void onBindViewHolder(@NonNull LinearViewHolder holder, int position) {
-        Record record = records.get(position);
+        Record record = records.get(records.size() - 1 - position);
         holder.moneyTv.setText(String.valueOf(record.getMoney()));
         holder.typeTv.setText(record.getTypename());
         imageId = TypeList.getInstance().getImageByName(record.getTypename());

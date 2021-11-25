@@ -2,7 +2,7 @@ package com.kls.okane_memo.db;
 
 import android.content.Context;
 
-import com.kls.okane_memo.ui.ViewModelFactory;
+import com.kls.okane_memo.util.ViewModelFactory;
 
 /**
  * Enables injection of data sources.

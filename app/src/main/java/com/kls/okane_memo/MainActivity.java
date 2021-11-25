@@ -10,7 +10,6 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,14 +18,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kls.okane_memo.db.Injection;
 import com.kls.okane_memo.db.Record;
 import com.kls.okane_memo.record.RecordLinearAdapter;
-import com.kls.okane_memo.ui.RecordViewModel;
-import com.kls.okane_memo.ui.ViewModelFactory;
+import com.kls.okane_memo.util.MyDatePickerDialog;
+import com.kls.okane_memo.util.RecordViewModel;
+import com.kls.okane_memo.util.ViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH) + 1;
         dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        String todayDate = String.format("%d月%d日", month, dayOfMonth);
+        String todayDate = String.format("%d年%d月", year, month);
         dateTextView.setText(todayDate);
 
         // 设置总金额数字的字体
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements
         viewModelFactory = Injection.provideViewModelFactory(this);
         recordViewModel = new ViewModelProvider(this, viewModelFactory).get(RecordViewModel.class);
 
-        recordViewModel.getRecordByDate(year, month, dayOfMonth)
+        recordViewModel.getRecordByMonth(year, month)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Record>>() {
@@ -123,9 +122,28 @@ public class MainActivity extends AppCompatActivity implements
         this.year = year;
         this.month = month + 1;
         this.dayOfMonth = dayOfMonth;
-        String date = String.format("%d月%d日", month + 1, dayOfMonth);
+        String date = String.format("%d年%d月", year, this.month);
         dateTextView.setText(date);
         Log.d("日期",date);
+
+        recordViewModel.getRecordByMonth(year, this.month)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Record>>() {
+                    @Override
+                    public void accept(List<Record> records) throws Exception {
+                        Log.d("MainActivity", "监测数据");
+                        recordList = records;
+                        updateTotalShow();
+                        adapter.setRecords(recordList);
+                        adapter.notifyDataSetChanged();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
     }
 
     @Override
@@ -139,11 +157,11 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             case R.id.datePicker:
                 Calendar calendar = Calendar.getInstance();
-                DatePickerDialog dialog = new DatePickerDialog(this, this,
+                MyDatePickerDialog dialog = new MyDatePickerDialog(MainActivity.this, 0, this::onDateSet,
                         calendar.get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH));
-                dialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+//                dialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 Log.d("Adapter里面的条目数", String.valueOf(adapter.getItemCount()));
                 dialog.show();
                 break;
@@ -163,5 +181,7 @@ public class MainActivity extends AppCompatActivity implements
         outTv.setText(String.valueOf(outTotal));
         inTv.setText(String.valueOf(inTotal));
     }
+
+
 
 }

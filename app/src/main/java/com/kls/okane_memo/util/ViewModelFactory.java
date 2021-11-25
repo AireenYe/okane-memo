@@ -1,4 +1,4 @@
-package com.kls.okane_memo.ui;
+package com.kls.okane_memo.util;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

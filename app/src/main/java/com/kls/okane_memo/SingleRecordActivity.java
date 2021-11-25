@@ -20,15 +20,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kls.okane_memo.db.Injection;
 import com.kls.okane_memo.db.Record;
-import com.kls.okane_memo.ui.RecordViewModel;
-import com.kls.okane_memo.ui.ViewModelFactory;
+import com.kls.okane_memo.util.RecordViewModel;
+import com.kls.okane_memo.util.ViewModelFactory;
 
 import java.util.Calendar;
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
