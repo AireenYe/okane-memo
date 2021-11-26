@@ -113,6 +113,7 @@
             android:layout_below="@id/remark_rl"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/record_selector"
             android:gravity="center_vertical">
 
             <ImageView
@@ -143,7 +144,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="32dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="@drawable/record_selector">
 
             <ImageView
                 android:id="@+id/date_iv"
