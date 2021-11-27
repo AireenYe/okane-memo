@@ -11,4 +11,9 @@
     <color name="grey_deep">#E3E3E3</color>
     <color name="transparent">#00000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="pie1">#4F4F4F</color>
+    <color name="pie2">#CAE1FF</color>
+    <color name="pie3">#B5B5B5</color>
+    <color name="pie4">#B2DFEE</color>
 </resources>

@@ -14,8 +14,9 @@
 
         <TextView
             android:id="@+id/datePicker"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:gravity="center_horizontal"
             android:text=""
@@ -23,6 +24,18 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:typeface="sans" />
+
+        <ImageView
+            android:id="@+id/btn_pie_chart"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/btn_pie_chart" />
     </RelativeLayout>
 
 <!--    <TextView-->
