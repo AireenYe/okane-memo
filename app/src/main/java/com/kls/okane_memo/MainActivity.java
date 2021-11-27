@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements
         View.OnClickListener,
         DatePickerDialog.OnDateSetListener{
 
+    private ImageView pieBtn;
     private FloatingActionButton recordBtn;
     private TextView dateTextView;
     private TextView inTv, outTv;
@@ -56,6 +58,11 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     void initShow(){
+        // 设置跳转到饼图的Activity
+        pieBtn = findViewById(R.id.btn_pie_chart);
+        pieBtn.setOnClickListener(this);
+
+
         // 设置日期显示选择
         dateTextView = findViewById(R.id.datePicker);
         dateTextView.setOnClickListener(this);
@@ -140,6 +147,11 @@ public class MainActivity extends AppCompatActivity implements
     public void onClick(View view){
         Intent intent = null;
         switch (view.getId()) {
+            case R.id.btn_pie_chart:
+                intent = new Intent(MainActivity.this, PieChartActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                break;
             case R.id.btn_record:
                 intent = new Intent(MainActivity.this, BookkeepingActivity.class);
                 startActivity(intent);
