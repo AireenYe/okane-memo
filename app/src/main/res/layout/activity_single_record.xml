@@ -16,8 +16,8 @@
         android:elevation="3dp">
         <ImageView
             android:id="@+id/single_record_iv_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:src="@mipmap/btn_back"
             android:scaleType="fitCenter"
             android:layout_marginTop="5dp"
@@ -29,12 +29,11 @@
         <TextView
             android:id="@+id/single_record_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:text="@string/singleRecordTitle"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:typeface="sans" />
     </RelativeLayout>
 
@@ -57,14 +56,14 @@
         <EditText
             android:id="@+id/input_money"
             android:layout_width="match_parent"
-            android:layout_height="96dp"
+            android:layout_height="88dp"
             android:layout_below="@id/kind_tv"
             android:background="@null"
-            android:gravity="right"
+            android:gravity="center_vertical|right"
             android:inputType="numberDecimal|number"
             android:paddingBottom="12dp"
             android:textColor="@color/black_light"
-            android:textSize="64sp" />
+            android:textSize="48sp" />
 
         <View
             android:id="@+id/outcome_line"
