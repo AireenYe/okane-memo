@@ -183,7 +183,8 @@ public class SingleRecordActivity extends AppCompatActivity {
                     dialog.show();
                     break;
                 case R.id.finish_btn:
-                    if(moneyEt.getText().toString() != null){
+                    String moneyInfo = moneyEt.getText().toString();
+                    if(moneyInfo != null && moneyInfo.length() > 0){
                         money = Double.parseDouble(moneyEt.getText().toString());
                         remarkInfo = remarkEt.getText().toString();
                         applyChange();
